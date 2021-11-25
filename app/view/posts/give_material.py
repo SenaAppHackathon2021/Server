@@ -54,3 +54,15 @@ class MaterialManage(Resource):
             return "You are not author", 403
 
         return "modify post success", 200
+
+    def delete(self, post_id):
+        check_login()
+            
+        user_id = session['user_id']
+
+        if Material.delete_material_post(post_id, user_id) == 500:
+            return "delete post fail", 500
+        elif Material.delete_material_post(post_id, user_id) == 403:
+            return "You are not author", 403
+
+        return "delete post success", 200

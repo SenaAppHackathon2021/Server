@@ -59,3 +59,19 @@ class Material(db.Model, BaseMixin):
             return 400
 
         return True
+
+    @staticmethod
+    def delete_material_post(post_id, user_id):
+        select_db = Material.query.filter_by(post_id=post_id).all()
+
+        try:
+            if select_db[0].user_id != user_id:
+                return 403
+
+            db.session.delete(select_db[0])
+            db.session.commit()
+
+        except:
+            return 500
+
+        return True
