@@ -1,5 +1,3 @@
-from datetime import datetime, timedelta
-
 from app.extension import db
 
 class BaseMixin:
