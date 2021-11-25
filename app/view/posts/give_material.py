@@ -26,3 +26,16 @@ class MaterialPost(Resource):
             })
         
         return result_arr, 200
+
+    def post(self):
+        check_login()
+
+        json_request = request.json
+
+        json_request['creation_time'] = datetime.datetime.now()
+        json_request['post_id'] = random.randrange(0, 100000)
+        json_request['user_id'] = session['user_id']
+
+        Material.create_material_post(request.json)
+
+        return "create post success", 200

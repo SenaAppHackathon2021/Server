@@ -28,3 +28,16 @@ class Material(db.Model, BaseMixin):
     @staticmethod
     def find_all_material_post():
         return Material.query.filter_by().all()
+
+    @staticmethod
+    def create_material_post(request : dict):
+        Material(
+            title=request['title'],
+            contents=request['content'],
+            image=request['image'],
+            location=request['location'],
+            contact=request['contact'],
+            post_id=request['post_id'],
+            user_id=request['user_id'],
+            creation_time=request['creation_time']
+        ).save()
