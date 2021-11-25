@@ -22,8 +22,6 @@ class ArtPosts(Resource):
                 "created_time" : str(all_arts[i].creation_time),
                 "picture" : all_arts[i].after_img
             })
-
-        print(result_arr)
         
         return result_arr, 200
 
