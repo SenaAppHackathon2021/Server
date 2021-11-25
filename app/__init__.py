@@ -1,10 +1,12 @@
 from flask import Flask
 
+def register_blueprint(app : Flask):
+    from .view.posts import arts_blueprint
+    app.register_blueprint(arts_blueprint)
+
 def create_app():
     app = Flask(__name__)
 
-    @app.route("/")
-    def hello():
-        return "Hello World"
+    register_blueprint(app)
 
     return app
