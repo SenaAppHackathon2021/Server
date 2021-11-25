@@ -39,3 +39,18 @@ class MaterialPost(Resource):
         Material.create_material_post(request.json)
 
         return "create post success", 200
+
+class MaterialManage(Resource):
+    def put(self, post_id):
+        session['user_id'] = 1
+        check_login()
+        
+        json_request = request.json
+        user_id = session['user_id']
+
+        if Material.update_material_post(json_request, post_id, user_id) == 400:
+            return "modify post fail", 400
+        elif Material.update_material_post(json_request, post_id, user_id) == 403:
+            return "You are not author", 403
+
+        return "modify post success", 200

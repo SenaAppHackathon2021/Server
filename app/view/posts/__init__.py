@@ -12,5 +12,6 @@ arts_api.add_resource(ManageArt, '/<post_id>')
 material_blueprint = Blueprint('material', __name__, url_prefix='/material')
 material_api = Api(material_blueprint)
 
-from .give_material import MaterialPost
+from .give_material import MaterialPost, MaterialManage
 material_api.add_resource(MaterialPost, '/')
+material_api.add_resource(MaterialManage, '/<post_id>')

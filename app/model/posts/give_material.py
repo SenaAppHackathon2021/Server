@@ -41,3 +41,21 @@ class Material(db.Model, BaseMixin):
             user_id=request['user_id'],
             creation_time=request['creation_time']
         ).save()
+
+    @staticmethod
+    def update_material_post(request : dict, post_id, user_id):
+        select_db = Material.query.filter_by(post_id=post_id).all()
+
+        try:
+            if select_db[0].user_id != user_id:
+                return 403
+
+            select_db[0].title = request['title']
+            select_db[0].contents = request['content']
+            select_db[0].image = request['image']
+
+            db.session.commit()
+        except:
+            return 400
+
+        return True
