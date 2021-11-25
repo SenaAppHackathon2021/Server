@@ -11,11 +11,12 @@ def register_extension(app : Flask):
     
 def register_blueprint(app : Flask):
 
-    from .view.account import account_blueprint, email_blueprint, login_blueprint, logout_blueprint
+    from .view.account import account_blueprint, email_blueprint, login_blueprint, logout_blueprint, profile_blueprint
     app.register_blueprint(account_blueprint)
     app.register_blueprint(email_blueprint)
     app.register_blueprint(login_blueprint)
     app.register_blueprint(logout_blueprint)
+    app.register_blueprint(profile_blueprint)
     
     from .view.posts import arts_blueprint, material_blueprint
     app.register_blueprint(arts_blueprint)

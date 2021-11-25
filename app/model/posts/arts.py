@@ -29,6 +29,10 @@ class ArtPost(db.Model, BaseMixin):
         return ArtPost.query.filter_by().all()
 
     @staticmethod
+    def find_my_arts(user_id):
+        return ArtPost.query.filter_by(user_id=user_id).all()
+
+    @staticmethod
     def create_art_post(request : dict):
         ArtPost(
             title=request['title'],
