@@ -3,7 +3,7 @@ secret_key = 'reart'
 
 db = {
     'user'     : 'root',
-    'password' : 'm-s-j-0-1-3-0',
+    'password' : 'moon',
     'host'     : '127.0.0.1',
     'port'     : '3306',
     'database' : 'reartdb'

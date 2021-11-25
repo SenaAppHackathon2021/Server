@@ -1,8 +1,9 @@
 # User 테이블 클래스와 메소드 작성
 from app.extexsion import db
 from app.view.account import email
+from app.model.mixin import BaseMixin
 
-class Account(db.Model):
+class Account(db.Model, BaseMixin):
     __tablename__ = "user"
     user_id = db.Column(db.Integer, primary_key = True, nullable = False)
     name = db.Column(db.String(15), nullable = False)
@@ -23,7 +24,7 @@ class Account(db.Model):
             user_id = user_id,
             name = name,
             email = email,
-            password = password
-        )
-        db.session.add()
-        db.session.commit()
+            password = password,
+            picture = ""
+        ).save()
+        
