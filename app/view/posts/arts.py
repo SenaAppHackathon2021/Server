@@ -1,8 +1,9 @@
 # 정크 아트 게시판 API 작성
-from flask import session
+from flask import session, request
 from flask_restful import Resource
 
 from app.model.posts import arts
+from app.view import check_login
 
 class ArtPosts(Resource):
     def get(self):
@@ -13,12 +14,5 @@ class ArtPosts(Resource):
         return "Get", 200
 
     def post(self):
-
+        json_request = request.json
         return "Post", 200
-
-def check_login():
-    try:
-        with session['user']:
-            pass
-    except:
-        return "You need login", 401
