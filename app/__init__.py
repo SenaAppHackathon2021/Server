@@ -1,6 +1,7 @@
 # create_app 함수로 Flask 인스턴스 리턴
 
-from flask import Flask
+from flask import Flask, config
+import config
 
 def register_extension(app : Flask):
     from app import extension
@@ -12,6 +13,10 @@ def register_blueprint(app : Flask):
 
 def create_app():
     app = Flask(__name__)
+
+    app.secret_key = "1234"
+    app.config["SQLALCHEMY_DATABASE_URI"] = config.DB_URL
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     register_blueprint(app)
     register_extension(app)
