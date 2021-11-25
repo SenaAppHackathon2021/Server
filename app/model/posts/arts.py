@@ -40,3 +40,20 @@ class ArtPost(db.Model, BaseMixin):
             user_id=request['user_id'],
             creation_time=request['creation_time']
         ).save()
+
+    @staticmethod
+    def update_art_post(request : dict, post_id):
+        select_db = ArtPost.query.filter_by(post_id=post_id).all()
+
+        try:
+            select_db[0].title = request['title']
+            select_db[0].contents = request['content']
+            select_db[0].before_img = request['picture']['before']
+            select_db[0].after_img=request['picture']['before']
+            select_db[0].sponsor=request['sponsor']
+
+            db.session.commit()
+        except:
+            return False
+
+        return True

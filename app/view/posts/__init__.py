@@ -5,5 +5,6 @@ from flask_restful import Api
 arts_blueprint = Blueprint('arts', __name__, url_prefix='/arts')
 arts_api = Api(arts_blueprint)
 
-from .arts import ArtPosts
+from .arts import ArtPosts, ManageArt
 arts_api.add_resource(ArtPosts, '/')
+arts_api.add_resource(ManageArt, '/<post_id>')

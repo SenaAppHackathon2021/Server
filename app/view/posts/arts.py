@@ -38,3 +38,14 @@ class ArtPosts(Resource):
         arts.ArtPost.create_art_post(json_request)
 
         return "create post success", 200
+
+class ManageArt(Resource):
+    def put(self, post_id):
+        check_login()
+        json_request = request.json
+
+
+        if arts.ArtPost.update_art_post(json_request, post_id) == False:
+            return "modify post fail", 400
+
+        return "modify post success", 200
