@@ -1,17 +1,21 @@
+# create_app 함수로 Flask 인스턴스 리턴
 from flask import Flask, config, session
 from datetime import timedelta
 from flask_mail import Mail, Message
 from config import mail_pw, secret_key, db, DB_URL
 
 def register_extension(app : Flask):
-    from .extexsion import db
+    from app import extension
     extexsion.db.init_app(app)
     extexsion.mail.init_app(app)
-
+    
 def register_blueprint(app : Flask):
     from .view.account import account_blueprint, email_blueprint
     app.register_blueprint(account_blueprint)
     app.register_blueprint(email_blueprint)
+    
+    from .view.posts import arts_blueprint
+    app.register_blueprint(arts_blueprint)
 
 def create_app():
     app = Flask(__name__)

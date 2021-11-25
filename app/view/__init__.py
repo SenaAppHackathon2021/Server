@@ -1,1 +1,8 @@
-# create_app 함수로 Flask 인스턴스 리턴
+from flask import session
+
+def check_login():
+    try:
+        with session['user']:
+            pass
+    except:
+        return False
