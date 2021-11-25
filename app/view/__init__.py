@@ -1,1 +1,0 @@
-# create_app 함수로 Flask 인스턴스 리턴
