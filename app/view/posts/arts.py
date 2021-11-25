@@ -36,4 +36,4 @@ class ArtPosts(Resource):
 
         arts.ArtPost.create_art_post(json_request)
 
-        return "Post", 200
+        return "create post success", 200
