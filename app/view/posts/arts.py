@@ -9,7 +9,8 @@ from app.view import check_login
 
 class ArtPosts(Resource):
     def get(self):
-        check_login()
+        if check_login() == False:
+            return "You need login", 401
 
         result_arr = []
 
