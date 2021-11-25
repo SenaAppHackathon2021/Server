@@ -1,0 +1,1 @@
+# blueprint와 flask_restful로 route 설정
