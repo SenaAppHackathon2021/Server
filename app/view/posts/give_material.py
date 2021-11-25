@@ -41,6 +41,27 @@ class MaterialPost(Resource):
         return "create post success", 200
 
 class MaterialManage(Resource):
+    def get(self, post_id):
+        check_login()
+
+        print(post_id)
+
+        material_post = Material.find_one_material_post(post_id)
+
+        print(material_post[0])
+
+        result = {
+            "title" : material_post[0].title,
+            "content" : material_post[0].contents,
+            "user" : material_post[0].user_id,
+            "creation_time" : material_post[0].creation_time,
+            "imgae" : material_post[0].image,
+            "locatino" : material_post[0].location,
+            "conttact" : material_post[0].contact
+        }
+
+        return result, 200
+
     def put(self, post_id):
         session['user_id'] = 1
         check_login()

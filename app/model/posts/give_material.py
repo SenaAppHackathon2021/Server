@@ -30,6 +30,10 @@ class Material(db.Model, BaseMixin):
         return Material.query.filter_by().all()
 
     @staticmethod
+    def find_one_material_post(post_id):
+        return Material.query.filter_by(post_id=post_id).all()
+
+    @staticmethod
     def create_material_post(request : dict):
         Material(
             title=request['title'],
