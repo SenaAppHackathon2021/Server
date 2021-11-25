@@ -1,15 +1,33 @@
-from flask import Flask
+from flask import Flask, config, session
+from datetime import timedelta
+from flask_mail import Mail, Message
+from config import mail_pw, secret_key, db, DB_URL
 
 def register_extension(app : Flask):
     from .extexsion import db
     extexsion.db.init_app(app)
+    extexsion.mail.init_app(app)
 
 def register_blueprint(app : Flask):
-    from .view.account import account_blueprint
+    from .view.account import account_blueprint, email_blueprint
     app.register_blueprint(account_blueprint)
+    app.register_blueprint(email_blueprint)
 
 def create_app():
     app = Flask(__name__)
+    app.permanent_session_lifetime = timedelta(minutes=1)
+
+    app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+    app.config['MAIL_PORT'] = 465
+    app.config['MAIL_USERNAME'] = 'reart.senaapp@gmail.com'
+    app.config['MAIL_PASSWORD'] = mail_pw
+    app.config['MAIL_USE_TLS'] = False
+    app.config['MAIL_USE_SSL'] = True
+    app.config['SECRET_KEY'] = secret_key
+
+    app.secret_key = "1234"
+    app.config["SQLALCHEMY_DATABASE_URI"] = DB_URL
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     register_blueprint(app)
     register_extension(app)
