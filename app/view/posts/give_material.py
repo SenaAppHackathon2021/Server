@@ -10,7 +10,8 @@ from app.model.posts.give_material import Material
 
 class MaterialPost(Resource):
     def get(self):
-        check_login()
+        if check_login() == False:
+            return "You need login", 401
 
         result_arr = []
 
@@ -28,7 +29,8 @@ class MaterialPost(Resource):
         return result_arr, 200
 
     def post(self):
-        check_login()
+        if check_login() == False:
+            return "You need login", 401
 
         json_request = request.json
 
@@ -42,7 +44,8 @@ class MaterialPost(Resource):
 
 class MaterialManage(Resource):
     def get(self, post_id):
-        check_login()
+        if check_login() == False:
+            return "You need login", 401
 
         material_post = Material.find_one_material_post(post_id)
 
@@ -59,7 +62,8 @@ class MaterialManage(Resource):
         return result, 200
 
     def put(self, post_id):
-        check_login()
+        if check_login() == False:
+            return "You need login", 401
         
         json_request = request.json
         user_id = session['user_id']
@@ -72,7 +76,8 @@ class MaterialManage(Resource):
         return "modify post success", 200
 
     def delete(self, post_id):
-        check_login()
+        if check_login() == False:
+            return "You need login", 401
             
         user_id = session['user_id']
 

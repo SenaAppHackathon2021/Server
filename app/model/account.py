@@ -27,4 +27,17 @@ class Account(db.Model, BaseMixin):
             password = password,
             picture = ""
         ).save()
+
+    @staticmethod
+    def login(email, password):
+        user = Account.query.filter_by(email=email, password=password).all()
+
+        if len(user) <= 0:
+            return None, 400
+        else:
+            return user[0].user_id, 200
+
+    @staticmethod
+    def find_profile(user_id):
+        return Account.query.filter_by(user_id=user_id).all()
         
