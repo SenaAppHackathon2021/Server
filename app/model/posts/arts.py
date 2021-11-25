@@ -42,10 +42,13 @@ class ArtPost(db.Model, BaseMixin):
         ).save()
 
     @staticmethod
-    def update_art_post(request : dict, post_id):
+    def update_art_post(request : dict, post_id, user_id):
         select_db = ArtPost.query.filter_by(post_id=post_id).all()
 
         try:
+            if select_db[0].user_id != user_id:
+                return 403
+
             select_db[0].title = request['title']
             select_db[0].contents = request['content']
             select_db[0].before_img = request['picture']['before']
@@ -54,6 +57,6 @@ class ArtPost(db.Model, BaseMixin):
 
             db.session.commit()
         except:
-            return False
+            return 400
 
         return True

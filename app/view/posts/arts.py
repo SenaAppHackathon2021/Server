@@ -42,10 +42,13 @@ class ArtPosts(Resource):
 class ManageArt(Resource):
     def put(self, post_id):
         check_login()
+        session['user_id'] = 2
         json_request = request.json
+        user_id = session['user_id']
 
-
-        if arts.ArtPost.update_art_post(json_request, post_id) == False:
+        if arts.ArtPost.update_art_post(json_request, post_id, user_id) == 400:
             return "modify post fail", 400
+        elif arts.ArtPost.update_art_post(json_request, post_id, user_id) == 403:
+            return "You are not author", 403
 
         return "modify post success", 200
