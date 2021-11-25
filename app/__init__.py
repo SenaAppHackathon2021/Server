@@ -8,8 +8,9 @@ def register_extension(app : Flask):
     extension.db.init_app(app)
 
 def register_blueprint(app : Flask):
-    from .view.posts import arts_blueprint
+    from .view.posts import arts_blueprint, material_blueprint
     app.register_blueprint(arts_blueprint)
+    app.register_blueprint(material_blueprint)
 
 def create_app():
     app = Flask(__name__)
