@@ -6,14 +6,15 @@ from config import mail_pw, secret_key, db, DB_URL
 
 def register_extension(app : Flask):
     from app import extension
-    extexsion.db.init_app(app)
-    extexsion.mail.init_app(app)
+    extension.db.init_app(app)
+    extension.mail.init_app(app)
     
 def register_blueprint(app : Flask):
 
-    from .view.account import account_blueprint, email_blueprint
+    from .view.account import account_blueprint, email_blueprint, login_blueprint
     app.register_blueprint(account_blueprint)
     app.register_blueprint(email_blueprint)
+    app.register_blueprint(login_blueprint)
     
     from .view.posts import arts_blueprint, material_blueprint
     app.register_blueprint(arts_blueprint)

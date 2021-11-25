@@ -17,3 +17,9 @@ email_api.add_resource(Email, '/')
 
 from .email import CheckEmail
 email_api.add_resource(CheckEmail, '/check')
+
+login_blueprint = Blueprint("Login", __name__, url_prefix="/login")
+login_api = Api(login_blueprint)
+
+from .login import Login
+login_api.add_resource(Login, '/')

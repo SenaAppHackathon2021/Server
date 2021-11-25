@@ -2,7 +2,7 @@ from flask import session
 
 def check_login():
     try:
-        with session['user']:
+        with session['user_id']:
             pass
     except:
-        return False
+        return "You need login", 401

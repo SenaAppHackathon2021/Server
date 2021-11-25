@@ -9,8 +9,7 @@ from app.view import check_login
 
 class ArtPosts(Resource):
     def get(self):
-        if check_login() == False:
-            return "You need login", 401
+        check_login()
 
         result_arr = []
 
@@ -29,8 +28,7 @@ class ArtPosts(Resource):
         return result_arr, 200
 
     def post(self):
-        if check_login() == False:
-            return "You need login", 401
+        check_login()
 
         json_request = request.json
 
@@ -44,8 +42,7 @@ class ArtPosts(Resource):
 
 class ManageArt(Resource):
     def put(self, post_id):
-        if check_login() == False:
-            return "You need login", 401
+        check_login()
         
         json_request = request.json
         user_id = session['user_id']
@@ -58,8 +55,7 @@ class ManageArt(Resource):
         return "modify post success", 200
 
     def delete(self, post_id):
-        if check_login() == False:
-            return "You need login", 401
+        check_login()
             
         user_id = session['user_id']
 
