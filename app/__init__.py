@@ -10,12 +10,14 @@ def register_extension(app : Flask):
     extexsion.mail.init_app(app)
     
 def register_blueprint(app : Flask):
+
     from .view.account import account_blueprint, email_blueprint
     app.register_blueprint(account_blueprint)
     app.register_blueprint(email_blueprint)
     
-    from .view.posts import arts_blueprint
+    from .view.posts import arts_blueprint, material_blueprint
     app.register_blueprint(arts_blueprint)
+    app.register_blueprint(material_blueprint)
 
 def create_app():
     app = Flask(__name__)
