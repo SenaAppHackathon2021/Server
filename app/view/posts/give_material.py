@@ -20,7 +20,7 @@ class MaterialPost(Resource):
             result_arr.append({
                 "post_id" : all_arts[i].post_id,
                 "title" : all_arts[i].title,
-                "requsetor" : all_arts[i].user_id, # 유저 테이블이 만들어지기 전 임시
+                "requsetor" : all_arts[i].user_id,
                 "created_time" : str(all_arts[i].creation_time),
                 "picture" : all_arts[i].image
             })
@@ -44,11 +44,7 @@ class MaterialManage(Resource):
     def get(self, post_id):
         check_login()
 
-        print(post_id)
-
         material_post = Material.find_one_material_post(post_id)
-
-        print(material_post[0])
 
         result = {
             "title" : material_post[0].title,
@@ -63,7 +59,6 @@ class MaterialManage(Resource):
         return result, 200
 
     def put(self, post_id):
-        session['user_id'] = 1
         check_login()
         
         json_request = request.json
