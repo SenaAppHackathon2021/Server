@@ -15,11 +15,12 @@ class ArtPosts(Resource):
 
         all_arts = arts.ArtPost.find_all_arts()
         
+        
         for i in range(0, len(all_arts)):
             result_arr.append({
                 "post_id" : all_arts[i].post_id,
                 "title" : all_arts[i].title,
-                "artist" : all_arts[i].user_id,
+                "artist" : all_arts[i].user_id, # 유저 테이블이 만들어지기 전 임시
                 "created_time" : str(all_arts[i].creation_time),
                 "picture" : all_arts[i].after_img
             })
