@@ -1,12 +1,12 @@
 # 정크 아트 게시글 테이블 클래스와 메소드 작성
-from sqlalchemy.orm import backref
 from app.extension import db
+from app.model.mixin import BaseMixin
 
-class ArtPost(db.Model):
+class ArtPost(db.Model, BaseMixin):
     __tablename__ = "art_post"
 
     post_id = db.Column(db.Integer, primary_key=True, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
+    user_id = db.Column(db.Integer, nullable=False)
     title = db.Column(db.String(20), nullable=False)
     contents = db.Column(db.String(300))
     sponsor = db.Column(db.String(500))
@@ -24,11 +24,19 @@ class ArtPost(db.Model):
         self.after_img = after_img
         self.creation_time = creation_time
 
-
     @staticmethod
     def find_all_arts():
         return ArtPost.query.filter_by().all()
 
     @staticmethod
-    def create_art_post():
-        return "create"
+    def create_art_post(request : dict):
+        ArtPost(
+            title=request['title'],
+            contents=request['content'],
+            before_img=request['picture']['before'],
+            after_img=request['picture']['before'],
+            sponsor=request['sponsor'],
+            post_id=request['post_id'],
+            user_id=request['user_id'],
+            creation_time=request['creation_time']
+        ).save()

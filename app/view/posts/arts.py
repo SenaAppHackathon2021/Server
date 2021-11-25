@@ -1,7 +1,8 @@
 # 정크 아트 게시판 API 작성
+import datetime
 from flask import json, session, request, jsonify
 from flask_restful import Resource
-import json
+import random
 
 from app.model.posts import arts
 from app.view import check_login
@@ -27,4 +28,11 @@ class ArtPosts(Resource):
 
     def post(self):
         json_request = request.json
+
+        json_request['creation_time'] = datetime.datetime.now()
+        json_request['post_id'] = random.randrange(0, 100000)
+        json_request['user_id'] = session['user_id']
+
+        arts.ArtPost.create_art_post(json_request)
+
         return "Post", 200
