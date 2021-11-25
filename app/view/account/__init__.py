@@ -23,3 +23,9 @@ login_api = Api(login_blueprint)
 
 from .login import Login
 login_api.add_resource(Login, '/')
+
+logout_blueprint = Blueprint("Logout", __name__, url_prefix="/logout")
+logout_api = Api(logout_blueprint)
+
+from .logout import LogOut
+logout_api.add_resource(LogOut, '/')
