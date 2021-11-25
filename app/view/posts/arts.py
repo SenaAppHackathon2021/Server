@@ -29,6 +29,9 @@ class ArtPosts(Resource):
         return result_arr, 200
 
     def post(self):
+        if check_login() == False:
+            return "You need login", 401
+
         json_request = request.json
 
         json_request['creation_time'] = datetime.datetime.now()
@@ -41,8 +44,9 @@ class ArtPosts(Resource):
 
 class ManageArt(Resource):
     def put(self, post_id):
-        check_login()
-        session['user_id'] = 2
+        if check_login() == False:
+            return "You need login", 401
+        
         json_request = request.json
         user_id = session['user_id']
 
@@ -52,3 +56,16 @@ class ManageArt(Resource):
             return "You are not author", 403
 
         return "modify post success", 200
+
+    def delete(self, post_id):
+        if check_login() == False:
+            return "You need login", 401
+            
+        user_id = session['user_id']
+
+        if arts.ArtPost.delete_art_post(post_id, user_id) == 500:
+            return "delete post fail", 500
+        elif arts.ArtPost.delete_art_post(post_id, user_id) == 403:
+            return "You are not author", 403
+
+        return "delete post success", 200
